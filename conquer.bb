@@ -15,6 +15,8 @@
             [comb.template :as comb]
             [cheshire.core :as json]))
 
+(def ^:dynamic *config*)
+
 (def usage "
 conquer
 
@@ -102,8 +104,6 @@ case of a list).")
 (def json json/generate-string)
 
 ;; --------------------------------------------------------------------------------
-
-(def ^:dynamic *config*)
 
 (defn -main [& args]
   (binding [*config* (smith/config usage)]
