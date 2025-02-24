@@ -21,7 +21,7 @@
 conquer
 
 Usage:
-  conquer [-t=<template>] <files-or-directories>
+  conquer [-t=<template>] <file-or-directory>
   conquer -h | --help
   conquer -v | --version
 Options:
