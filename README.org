@@ -19,28 +19,28 @@ combining structured data (YAML/CSV) with templates.
 
 ** Installation
 
-```bash
+#+begin_src bash
 bbin install io.github.200ok-ch/conquer
-```
+#+end_src
 
 ** Usage
 
 Basic syntax:
-```bash
-conquer [-t=<template>] [-u] <file-or-directory>
-```
+#+begin_src bash
+conquer [-t=<template>] [-u] <file-or-directory>=
+#+end_src
 
 Options:
-- ```-h, --help```: Show help screen
-- ```-t, --template=<template>```: Override the template file
-- ```-u, --update```: Create or update files
-- ```-v, --version```: Show version
+- =-h, --help=: Show help screen
+- =-t, --template=<template>=: Override the template file
+- =-u, --update=: Create or update files
+- =-v, --version=: Show version
 
 *** Basic Example
 
-```bash
+#+begin_src bash
 conquer -t template.html.comb greeting.yml
-```
+#+end_src
 
 Read more about conquer in my [[x][blog post]] (soonish).
 
