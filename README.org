@@ -1,0 +1,58 @@
+* Conquer
+
+A simple yet powerful template rendering tool that follows the Unix
+philosophy of doing one thing well.
+
+** Overview
+
+Conquer is a command-line utility that generates text files by
+combining structured data (YAML/CSV) with templates.
+
+** Features
+
+- Supports YAML and CSV input files
+- Uses Comb templates (```.comb``` extension)
+- Direct file updates with ```-u``` flag
+- Directory tree processing
+- JSON generation support
+- Simple command-line interface [^1][^2]
+
+** Installation
+
+```bash
+bbin install io.github.200ok-ch/conquer
+```
+
+** Usage
+
+Basic syntax:
+```bash
+conquer [-t=<template>] [-u] <file-or-directory>
+```
+
+Options:
+- ```-h, --help```: Show help screen
+- ```-t, --template=<template>```: Override the template file
+- ```-u, --update```: Create or update files
+- ```-v, --version```: Show version [^2]
+
+*** Basic Example
+
+```bash
+conquer -t template.html.comb greeting.yml
+```
+
+Read more about conquer in my [[x][blog post]] (soonish).
+
+** Use Cases
+
+- Static website generation
+- Configuration file management
+- Documentation generation
+- Report creation
+- Data transformation
+- Infrastructure as Code (e.g. Terraform/OpenTofu configurations)
+
+** License
+
+tbd.
