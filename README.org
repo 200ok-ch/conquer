@@ -11,11 +11,11 @@ combining structured data (YAML/CSV) with templates.
 ** Features
 
 - Supports YAML and CSV input files
-- Uses Comb templates (```.comb``` extension)
-- Direct file updates with ```-u``` flag
+- Uses Comb templates (=.comb= extension)
+- Direct file updates with =-u= flag
 - Directory tree processing
 - JSON generation support
-- Simple command-line interface [^1][^2]
+- Simple command-line interface
 
 ** Installation
 
@@ -34,7 +34,7 @@ Options:
 - ```-h, --help```: Show help screen
 - ```-t, --template=<template>```: Override the template file
 - ```-u, --update```: Create or update files
-- ```-v, --version```: Show version [^2]
+- ```-v, --version```: Show version
 
 *** Basic Example
 
