@@ -1,2 +1,6 @@
 {;; :deps {atomize {:local/root "."}}
- :bbin/bin {conquer {:main-opts ["-m" "conquer"]}}}
+ :bbin/bin {conquer {:main-opts ["-m" "conquer"]}}
+
+ :deps {comb/comb {:mvn/version "0.1.1"}
+        io.github.200ok-ch/shell-smith
+        {:local/root "../shell-smith"}}}

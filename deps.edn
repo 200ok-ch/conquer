@@ -1,4 +1,9 @@
 {:paths ["."]
- :deps {io.github.200ok-ch/shell-smith
-        {:git/sha "b4b7ddf7319a5f6d30cf42b3ce609f49094bf0c2"}
-        comb/comb {:mvn/version "0.1.1"}}}
+ :deps {comb/comb {:mvn/version "0.1.1"}
+        io.github.200ok-ch/shell-smith
+        {:git/url "https://github.com/200ok-ch/shell-smith"}}
+ :aliases
+ {:dev
+  {:override-deps
+   {io.github.200ok-ch/shell-smith
+    {:local/root "../shell-smith"}}}}}

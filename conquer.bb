@@ -21,12 +21,13 @@
 conquer
 
 Usage:
-  conquer [-t=<template>] <file-or-directory>
+  conquer [-t=<template>] [-u] <file-or-directory>
   conquer -h | --help
   conquer -v | --version
 Options:
   -h --help                 Show this screen.
   -t --template=<template>  Override the template file
+  -u --update               Creates or updates files.
   -v --version              Show version.
 
 ----
@@ -48,7 +49,7 @@ case of a list).")
           ;; in case it is just a missing var, add missing var to
           ;; bindings and re-wrap in a function for next trampoline
           ;; iteration
-          (stubborn-eval* template (assoc bindings (keyword missing) nil))
+          (stubborn-eval* template (assoc bindings (keyword missing) ""))
           ;; re-throw instead
           (throw e))))))
 
@@ -56,11 +57,12 @@ case of a list).")
   (trampoline (stubborn-eval* template bindings)))
 
 (defn conquer-entry [path {:keys [template] :as entry}]
-  (-> (str path "/../" template)
-      fs/canonicalize
-      str
-      slurp
-      (stubborn-eval entry)))
+  (let [filename (str path "/../" (or (:template *config*) template))]
+    (-> filename
+        fs/canonicalize
+        str
+        slurp
+        (stubborn-eval entry))))
 
 (defn update-file [path content]
   (when-not (and (fs/regular-file? path)
@@ -75,24 +77,27 @@ case of a list).")
 
 (defmethod read-file :csv [file]
   (with-open [reader (io/reader file)]
-    (let [[headers & rows] (csv/read-csv reader)]
-      (map (partial zipmap headers) rows))))
+    (let [[headers & rows] (csv/read-csv reader)
+          headers (map keyword headers)]
+      (mapv (partial zipmap headers) rows))))
 
 (defn- ext
   ([path] (ext path 0))
   ([path n]
-   (-> path (str/split #".") reverse (nth n))))
+   (-> path (str/split #"\.") reverse (nth n))))
 
 (defn conquer-file [file]
   (let [entries (-> file read-file vector flatten)
         iext (ext file)
         oext (-> (:template *config*)
                  (or (-> entries first :template))
-                 (ext 1))]
-    (->> entries
-         (map (partial conquer-entry file))
-         (str/join "\n")
-         (update-file (str/replace file (re-pattern (str iext "$")) oext)))))
+                 (ext 1))
+        content (->> entries
+                     (map (partial conquer-entry file))
+                     (str/join "\n"))]
+    (if (:update *config*)
+      (update-file (str/replace file (re-pattern (str iext "$")) oext) content)
+      (println content))))
 
 (defn conquer-files [files]
   (run! conquer-file files))
