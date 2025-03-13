@@ -104,9 +104,6 @@ case of a list).")
   (run! conquer-file files))
 
 (defn conquer-directory [file-or-directory]
-  ;; debug
-  (println "ls " (str file-or-directory "/**.{yml,yaml,csv}"))
-  (prn (fs/glob file-or-directory "**.{yml,yaml,csv}"))
   (as-> file-or-directory %
     (fs/glob % "**.{yml,yaml,csv}")
     (map str %)
@@ -128,7 +125,7 @@ case of a list).")
         (println usage)
 
         (:version *config*)
-        (println "conquer 0.1.1 (LULW)")
+        (println "conquer 0.1.2 (OMEGALUL)")
 
         :else
         (cond
