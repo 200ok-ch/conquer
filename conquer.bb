@@ -105,7 +105,7 @@ case of a list).")
 
 (defn conquer-directory [file-or-directory]
   (as-> file-or-directory %
-    (fs/glob % "**/*.{yml,yaml,csv}")
+    (fs/glob % "**.{yml,yaml,csv}")
     (map str %)
     (conquer-files %)))
 
