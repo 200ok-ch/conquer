@@ -21,11 +21,12 @@
 conquer
 
 Usage:
-  conquer [-t=<template>] [-u] [file-or-directory]
+  conquer [-t=<template>] [-u] [-p=file-or-directory]
   conquer -h | --help
   conquer -v | --version
 Options:
   -h --help                 Show this screen.
+  -p --path=<path>          Path to operate on [default: .]
   -t --template=<template>  Override the template file
   -u --update               Creates or updates files.
   -v --version              Show version.
@@ -118,7 +119,7 @@ case of a list).")
 
 (defn -main [& args]
   (binding [*config* (smith/config usage)]
-    (let [{:keys [file-or-directory]} *config*]
+    (let [{:keys [path]} *config*]
       (cond
         (:help *config*)
         (println usage)
@@ -128,14 +129,14 @@ case of a list).")
 
         :else
         (cond
-          (nil? file-or-directory)
+          (nil? path)
           (conquer-directory ".")
 
-          (fs/directory? file-or-directory)
-          (conquer-directory file-or-directory)
+          (fs/directory? path)
+          (conquer-directory path)
 
-          (fs/regular-file? file-or-directory)
-          (conquer-files [file-or-directory]))))))
+          (fs/regular-file? path)
+          (conquer-files [path]))))))
 
 (when (= *file* (System/getProperty "babashka.file"))
   (apply -main *command-line-args*))
