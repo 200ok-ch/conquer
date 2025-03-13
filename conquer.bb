@@ -126,7 +126,7 @@ case of a list).")
         (:version *config*)
         (println "conquer 0.1.1 (LULW)")
 
-        file-or-directory
+        :else
         (cond
           (nil? file-or-directory)
           (conquer-directory ".")
@@ -135,12 +135,7 @@ case of a list).")
           (conquer-directory file-or-directory)
 
           (fs/regular-file? file-or-directory)
-          (conquer-files [file-or-directory]))
-
-        :else
-        (do
-          (println "Something is off. This is the config:")
-          (prn *config*))))))
+          (conquer-files [file-or-directory]))))))
 
 (when (= *file* (System/getProperty "babashka.file"))
   (apply -main *command-line-args*))
