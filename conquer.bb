@@ -21,7 +21,7 @@
 conquer
 
 Usage:
-  conquer [-t=<template>] [-u] <file-or-directory>
+  conquer [-t=<template>] [-u] [file-or-directory]
   conquer -h | --help
   conquer -v | --version
 Options:
@@ -102,6 +102,12 @@ case of a list).")
 (defn conquer-files [files]
   (run! conquer-file files))
 
+(defn conquer-directory [file-or-directory]
+  (as-> file-or-directory %
+    (fs/glob % "**/*.{yml,yaml,csv}")
+    (map str %)
+    (conquer-files %)))
+
 ;; --------------------------------------------------------------------------------
 
 ;; shorthands for usage in templates
@@ -122,11 +128,12 @@ case of a list).")
 
         file-or-directory
         (cond
+          (nil? file-or-directory)
+          (conquer-directory ".")
+
           (fs/directory? file-or-directory)
-          (as-> file-or-directory %
-            (fs/glob % "**/*.{yml,yaml,csv}")
-            (map str %)
-            (conquer-files %))
+          (conquer-directory file-or-directory)
+
           (fs/regular-file? file-or-directory)
           (conquer-files [file-or-directory]))
 
