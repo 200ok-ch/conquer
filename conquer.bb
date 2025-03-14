@@ -44,15 +44,16 @@ case of a list).")
 (defn stubborn-eval* [template bindings]
   (fn []
     (try
-      (comb/eval template bindings)
-      (catch clojure.lang.ExceptionInfo e
-        (if-let [[_ missing] (re-matches #"Could not resolve symbol: ([\w-]+)" (ex-message e))]
-          ;; in case it is just a missing var, add missing var to
-          ;; bindings and re-wrap in a function for next trampoline
-          ;; iteration
-          (stubborn-eval* template (assoc bindings (keyword missing) ""))
-          ;; re-throw instead
-          (throw e))))))
+      (binding [*ns* (create-ns 'conquer)]
+        (comb/eval template bindings)
+        (catch clojure.lang.ExceptionInfo e
+          (if-let [[_ missing] (re-matches #"Could not resolve symbol: ([\w-]+)" (ex-message e))]
+            ;; in case it is just a missing var, add missing var to
+            ;; bindings and re-wrap in a function for next trampoline
+            ;; iteration
+            (stubborn-eval* template (assoc bindings (keyword missing) ""))
+            ;; re-throw instead
+            (throw e)))))))
 
 (defn stubborn-eval [template bindings]
   (trampoline (stubborn-eval* template bindings)))
