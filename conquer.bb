@@ -115,6 +115,15 @@ case of a list).")
 
 (def json json/generate-string)
 
+(defn p [x]
+  (cond
+    (string? x)
+    (or (not-empty x) "(empty)")
+    (sequential? x)
+    (str/join ", " (map prn-str x))
+    :else
+    (prn-str x)))
+
 ;; --------------------------------------------------------------------------------
 
 (defn -main [& args]
