@@ -116,16 +116,18 @@ case of a list).")
 
 (def json json/generate-string)
 
+(def prn-str-trim (comp str/trim prn-str))
+
 (defn v [x]
   (cond
     (nil? x)
     "nil"
     (string? x)
-    (or (prn-str (not-empty x)) "empty")
+    (or (prn-str-trim (not-empty x)) "empty")
     (sequential? x)
-    (str "[" (str/join ", " (map (comp str/trim prn-str) x)) "]")
+    (str "[" (str/join ", " (map prn-str-trim x)) "]")
     :else
-    (str/trim (prn-str x))))
+    (prn-str-trim x)))
 
 ;; --------------------------------------------------------------------------------
 
