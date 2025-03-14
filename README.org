@@ -14,7 +14,6 @@ combining structured data (YAML/CSV) with templates.
 - Uses Comb templates (=.comb= extension)
 - Direct file updates with =-u= flag
 - Directory tree processing
-- JSON generation support
 - Simple command-line interface
 
 ** Installation
