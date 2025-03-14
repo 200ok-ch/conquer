@@ -117,12 +117,14 @@ case of a list).")
 
 (defn p [x]
   (cond
+    (nil? x)
+    "(nil)"
     (string? x)
     (or (not-empty x) "(empty)")
     (sequential? x)
-    (str/join ", " (map prn-str x))
+    (str/join ", " (map (comp str/trim prn-str) x))
     :else
-    (prn-str x)))
+    (str/trim (prn-str x))))
 
 ;; --------------------------------------------------------------------------------
 
