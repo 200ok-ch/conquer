@@ -31,6 +31,7 @@ conquer [-t=<template>] [-u] [-p=path]
 
 Options:
 - =-h, --help=: Show help screen
+- =-p, --path=<path>=: Path to operate on (file or directory) [default: .]
 - =-t, --template=<template>=: Override the template file
 - =-u, --update=: Create or update files
 - =-v, --version=: Show version
