@@ -26,7 +26,7 @@ bbin install io.github.200ok-ch/conquer
 
 Basic syntax:
 #+begin_example
-conquer [-t=<template>] [-u] <file-or-directory>
+conquer [-t=<template>] [-u] [-p=path]
 #+end_example
 
 Options:

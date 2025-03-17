@@ -21,12 +21,12 @@
 conquer
 
 Usage:
-  conquer [-t=<template>] [-u] [-p=file-or-directory]
+  conquer [-t=<template>] [-u] [-p=path]
   conquer -h | --help
   conquer -v | --version
 Options:
   -h --help                 Show this screen.
-  -p --path=<path>          Path to operate on [default: .]
+  -p --path=<path>          Path to operate on (file or directory) [default: .]
   -t --template=<template>  Override the template file
   -u --update               Creates or updates files.
   -v --version              Show version.
