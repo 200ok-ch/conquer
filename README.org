@@ -43,6 +43,17 @@ conquer -t template.html.comb greeting.yml
 
 Read more about conquer in my [[x][blog post]] (soonish).
 
+*** Troubleshooting
+
+This error
+
+#+begin_example
+java.lang.String cannot be cast to clojure.lang.IFn
+#+end_example
+
+Is most likely an error in the template. It happens when you try to
+use a function it cannot resolve.
+
 ** Use Cases
 
 - Static website generation
