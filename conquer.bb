@@ -21,7 +21,7 @@
 conquer
 
 Usage:
-  conquer [-t=<template>] [-u] [-p=path]
+  conquer [--template=<template>] [--update] [--path=<path>]
   conquer -h | --help
   conquer -v | --version
 Options:
