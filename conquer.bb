@@ -59,7 +59,11 @@ case of a list).")
   (trampoline (stubborn-eval* template bindings)))
 
 (defn conquer-entry [path {:keys [template] :as entry}]
-  (let [filename (str path "/../" (or (:template *config*) template))]
+  (let [filename (or
+                  ;; if it comes from the config it is relative to cwd
+                  (:template *config*)
+                  ;; if it comes from the template it is relative to the template
+                  (str path "/../" template))]
     (-> filename
         fs/canonicalize
         str
